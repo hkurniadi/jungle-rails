@@ -11,9 +11,9 @@ class Admin::CategoriesController < ApplicationController
     @category = Category.new(category_params)
 
     if @category.save
-      redirect_to admin_categories_path, notice: 'Category created!'
+      redirect_to [:admin, :categorys], notice: 'Category created!'
     else
-      render new_admin_category_path
+      render :new
     end
   end
 
