@@ -2,6 +2,7 @@ class CartsController < ApplicationController
   before_filter :authorize
 
   def show
+    render "empty" if cart.size.zero?
   end
 
   def add_item
