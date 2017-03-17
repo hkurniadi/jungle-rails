@@ -132,5 +132,29 @@ cat3.products.create!({
   price: 2_483.75
 })
 
+## CATEGORIES
+
+puts "Creating fake reviews..."
+
+review1 = Review.create({
+  product_id: 10,
+  user_id: 1,
+  description: "great stuff",
+  rating: 4
+})
+
+review2 = Review.create({
+  product_id: 12,
+  user_id: 3,
+  description: "great",
+  rating: 2
+})
+
+review3 = Review.create({
+  product_id: 11,
+  user_id: 4,
+  description: "wow",
+  rating: 2
+})
 
 puts "DONE!"
