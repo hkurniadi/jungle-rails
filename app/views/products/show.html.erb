@@ -23,6 +23,9 @@
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
           <% if current_user %>
+        </dl>
+
+        <section class="create-review jumbotron">
           <dt>Create Review</dt>
             <dd>
             <%= form_for :review, url: product_reviews_path(@product.id) do |form| %>
@@ -38,9 +41,12 @@
             <% end %>
             </dd>
           <% end %>
-          <dt>Reviews</dt>
-          <dd><%= render @reviews %></dd>
-        </dl>
+        </section>
+
+        <section class="review-list">
+          <h3>Product Reviews</h3>
+          <%= render @reviews %>
+        </section>
       </div>
     </div>
 

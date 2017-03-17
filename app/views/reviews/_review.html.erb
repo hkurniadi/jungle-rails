@@ -1,12 +1,13 @@
-<div class="col-sm-8">
-  <h4>User <%= review.user_id %> review</h4>
-  <dl class="dl-horizontal">
-    <dt>Rating</dt>
-    <dd><%= review.rating %></dd>
-    <dt>Description</dt>
-    <dd><%= review.description %></dd>
+<div class="card text-center">
+  <div class="card-header"><h3>User <%= review.user_id %> review</h3></div>
+  <div class="card-block">
+    <h4 class="card-title">Rating:</h4>
+    <span class="card-text"><%= review.rating %></span>
+    <div class="line-separator"></div>
+    <h4 class="card-title">Comments:</h4>
+    <p class="card-text"><%= review.description %></p>
     <% if current_user && review.user_id == current_user.id %>
-      <%= link_to "Delete Comment", [@product, review], method: :delete, data: { confirm: "Are you sure?"} %>
+      <%= link_to "Delete Comment", [@product, review], method: :delete, data: { confirm: "Are you sure?"}, class: "btn btn-primary text-center" %>
     <% end %>
-  </dl>
+  </div>
 </div>

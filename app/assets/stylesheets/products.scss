@@ -82,5 +82,29 @@ main section.products-show {
     img.main-img {
       max-width: 100%;
     }
+
+    .card {
+      border: 1px solid rgba(0,0,0,.125);
+      border-radius: .25rem;
+      margin: 1.25rem;
+    }
+
+    .card-header {
+      padding: .75rem 1.25rem;
+      margin-bottom: 0;
+      background-color: #f7f7f9;
+      border-bottom: 1px solid rgba(0,0,0,.125);
+    }
+
+    .card-block {
+      flex: 1 1 auto;
+      padding: 1.25rem;
+
+      .line-separator {
+        height:1px;
+        background:#717171;
+        border-bottom:1px solid #313030;
+      }
+    }
   }
 }
