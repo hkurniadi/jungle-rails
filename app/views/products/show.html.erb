@@ -22,6 +22,20 @@
           <dd><%= @product.quantity %></dd>
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
+          <dt>
+            <h2>Create Review</h2>
+            <%= form_for :review, url: product_reviews_path(@product.id) do |form| %>
+              <div>
+                <p>Add Description</p>
+                <%= form.text_area :description %>
+                <%= form.submit 'Add Comment' %>
+              </div>
+              <div>
+                <p>Rate</p>
+                <%= form.select :rating, [[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]] %>
+              </div>
+            <% end %>
+          </dt>
           <dt>Reviews</dt>
           <dd><%= render @reviews %></dd>
         </dl>
