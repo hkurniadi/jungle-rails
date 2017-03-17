@@ -14,7 +14,7 @@
     </thead>
     <tbody>
       <% @cart_total = 0 %>
-      <% @items_ordered = @order.line_items.where(order_id: @order.id) %>
+      <% @items_ordered = LineItem.where(order_id: @order.id) %>
       <% @items_ordered.each do |item| %>
         <% quantity = item.quantity %>
         <% product_id = item.product_id %>

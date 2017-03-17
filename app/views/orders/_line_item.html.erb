@@ -1,5 +1,5 @@
 <!-- TODO refactor code so it's handled in the controller -->
-<% @items_ordered = @order.line_items.where(order_id: @order.id) %>
+<% @items_ordered = LineItem.where(order_id: @order.id) %>
 <% @items_ordered.each do |item| %>
   <% quantity = item.quantity %>
   <% product_id = item.product_id %>
