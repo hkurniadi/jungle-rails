@@ -1,0 +1,54 @@
+<header class="page-header">
+  <h1>Jungle Order #<%= @order.id %></h1>
+</header>
+<h1>Thank you for the purchase, <%= @order.email %></h1>
+
+<div class="panel panel-default items">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th colspan="2">Products Purchased</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart_total = 0 %>
+      <% @items_ordered = @order.line_items.where(order_id: @order.id) %>
+      <% @items_ordered.each do |item| %>
+        <% quantity = item.quantity %>
+        <% product_id = item.product_id %>
+        <% if product = Product.find_by(id: product_id) %>
+          <% item_total = product.price * quantity %>
+          <% @cart_total += item_total %>
+          <tr>
+            <td>
+              <%= image_tag product.image.tiny %>
+            </td>
+            <td>
+              <h4><%= product.name %></h4>
+              <br>
+              <p><%= product.description %></p>
+            </td>
+            <td>
+              <%= quantity %>
+            </td>
+            <td>
+              <%= item_total %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th colspan="3">
+          TOTAL:
+        </th>
+        <th>
+          <%= @cart_total %>
+        </th>
+      </tr>
+    </tfoot>
+  </table>
+</div>

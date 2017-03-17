@@ -1,0 +1,23 @@
+Jungle Order #<%= @order.id %>
+============
+Thank you for the purchase, <%= @order.email %>
+
+<% @cart_total = 0 %>
+<% @items_ordered = @order.line_items.where(order_id: @order.id) %>
+<% @items_ordered.each do |item| %>
+  <% quantity = item.quantity %>
+  <% product_id = item.product_id %>
+  <% if product = Product.find_by(id: product_id) %>
+  <% item_total = product.price * quantity %>
+  <% @cart_total += item_total %>
+Products Purchased:
+-------------------
+<%= product.name %>
+___________________
+<%= product.description %>
+
+Quantity: <%= quantity %>
+Total Price: <%= item_total %>
+  <% end %>
+<% end %>
+TOTAL: <%= @cart_total %>
