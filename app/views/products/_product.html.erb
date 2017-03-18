@@ -15,6 +15,7 @@
     <%= link_to product, class: 'btn btn-default pull-right' do %>
       Details &raquo;
     <% end %>
+    <div class"avg-rating">Overall Rating: <%=  product.reviews.average(:rating) %></div>
   </footer>
 
   <aside class="price">

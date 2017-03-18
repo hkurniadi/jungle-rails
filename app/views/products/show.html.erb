@@ -22,11 +22,13 @@
           <dd><%= @product.quantity %></dd>
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
-          <% if current_user %>
+          <dt>Overall Rating</dt>
+          <dd><%= @product.reviews.average(:rating) %></dd>
         </dl>
 
-        <section class="create-review jumbotron">
-          <h2>Create Review</h2>
+        <% if current_user %>
+          <section class="create-review jumbotron">
+            <h2>Create Review</h2>
             <%= form_for :review, url: product_reviews_path(@product.id), class: "form-group" do |form| %>
               <div>
                 <h3>Description</h3>
@@ -40,8 +42,8 @@
                 <%= form.submit 'Add Review', class: "btn btn-primary" %>
               </div>
             <% end %>
-          <% end %>
-        </section>
+          </section>
+        <% end %>
 
         <section class="review-list">
           <h3>Product Reviews</h3>
