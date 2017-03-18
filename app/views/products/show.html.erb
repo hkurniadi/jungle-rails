@@ -26,20 +26,20 @@
         </dl>
 
         <section class="create-review jumbotron">
-          <dt>Create Review</dt>
-            <dd>
-            <%= form_for :review, url: product_reviews_path(@product.id) do |form| %>
+          <h2>Create Review</h2>
+            <%= form_for :review, url: product_reviews_path(@product.id), class: "form-group" do |form| %>
               <div>
-                <p>Add Description</p>
-                <%= form.text_area :description %>
-                <%= form.submit 'Add Comment' %>
+                <h3>Description</h3>
+                <%= form.text_area :description, class: "form-control" %>
               </div>
               <div>
-                <p>Rate</p>
-                <%= form.select :rating, [[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]], include_blank: true %>
+                <h3>Rate</h3>
+                <%= form.select :rating, [[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]], include_blank: true, class: "form-control" %>
+              </div>
+              <div>
+                <%= form.submit 'Add Review', class: "btn btn-primary" %>
               </div>
             <% end %>
-            </dd>
           <% end %>
         </section>
 
