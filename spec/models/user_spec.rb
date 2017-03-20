@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+# TODO refactor codes, DRY out your code
 RSpec.describe User, type: :model do
   # pending "add some examples to (or delete) #{__FILE__}"
   describe "Validations" do
@@ -88,6 +88,47 @@ RSpec.describe User, type: :model do
           })
         expect{ @user.save! }.to raise_error(ActiveRecord::RecordInvalid)
         expect(@user.errors.full_messages).to include("Last name can't be blank")
+      end
+    end
+
+    context "given password too short" do
+      it "should not save the new user" do
+        @user = User.new({
+            first_name: "Bob",
+            last_name: "Klob",
+            email: "bob@email.com",
+            password: "qwert",
+            password_confirmation: "qwert"
+          })
+        expect{ @user.save! }.to raise_error(ActiveRecord::RecordInvalid)
+        expect(@user.errors.full_messages).to include("Password is too short (minimum is 8 characters)")
+      end
+    end
+
+    context "given password too short" do
+      it "should not save the new user" do
+        @user = User.new({
+            first_name: "Bob",
+            last_name: "Klob",
+            email: "bob@email.com",
+            password: "qwert",
+            password_confirmation: "qwert"
+          })
+        expect{ @user.save! }.to raise_error(ActiveRecord::RecordInvalid)
+        expect(@user.errors.full_messages).to include("Password is too short (minimum is 8 characters)")
+      end
+    end
+
+    context "given password is at least 8 characters long" do
+      it "should save the new user" do
+        @user = User.new({
+            first_name: "Bob",
+            last_name: "Klob",
+            email: "bob@email.com",
+            password: "qwertqwerty",
+            password_confirmation: "qwertqwerty"
+          })
+        expect(@user.save!).to be true
       end
     end
   end
