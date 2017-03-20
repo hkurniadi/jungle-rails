@@ -34,7 +34,7 @@ RSpec.describe Product, type: :model do
           })
         expect{ @product.save! }.to raise_error(ActiveRecord::RecordInvalid)
         # @product.errors.full_messages[0] returns "Name can't be blank"
-        expect(@product.errors.full_messages).to contain_exactly("Name can't be blank")
+        expect(@product.errors.full_messages).to include("Name can't be blank")
       end
     end
 
@@ -67,7 +67,7 @@ RSpec.describe Product, type: :model do
             category_id: @category.id
           })
         expect{ @product.save! }.to raise_error(ActiveRecord::RecordInvalid)
-        expect(@product.errors.full_messages).to contain_exactly("Quantity can't be blank")
+        expect(@product.errors.full_messages).to include("Quantity can't be blank")
       end
     end
 
@@ -83,7 +83,7 @@ RSpec.describe Product, type: :model do
             quantity: 12
           })
         expect{ @product.save! }.to raise_error(ActiveRecord::RecordInvalid)
-        expect(@product.errors.full_messages).to contain_exactly("Category can't be blank")
+        expect(@product.errors.full_messages).to include("Category can't be blank")
       end
     end
   end
