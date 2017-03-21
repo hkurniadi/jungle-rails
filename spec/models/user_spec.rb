@@ -132,4 +132,51 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe ".authenticate_with_credentials" do
+    context "given right email and password" do
+      it "should return an instance of the user" do
+        @user = User.new({
+            first_name: "Bib",
+            last_name: "Bob",
+            email: "beepbeep@email.com",
+            password: "qwertyqwerty",
+            password_confirmation: "qwertyqwerty"
+          })
+        @user.save
+        @instance_of_user = User.find_by(email: "beepbeep@email.com").try(:authenticate, "qwertyqwerty")
+        expect(@instance_of_user).to_not be nil
+      end
+    end
+
+    context "given wrong email and right password" do
+      it "should not return an instance of the user" do
+        @user = User.new({
+            first_name: "Bib",
+            last_name: "Bob",
+            email: "beepbeep@email.com",
+            password: "qwertyqwerty",
+            password_confirmation: "qwertyqwerty"
+          })
+        @user.save
+        @instance_of_user = User.find_by(email: "bepbeep@email.com").try(:authenticate, "qwertyqwerty")
+        expect(@instance_of_user).to be nil
+      end
+    end
+
+    context "given right email and wrong password" do
+      it "should not return an instance of the user" do
+        @user = User.new({
+            first_name: "Bib",
+            last_name: "Bob",
+            email: "beepbeep@email.com",
+            password: "qwertyqwerty",
+            password_confirmation: "qwertyqwerty"
+          })
+        @user.save
+        @instance_of_user = User.find_by(email: "beepbeep@email.com").try(:authenticate, "qwertyqwer")
+        expect(@instance_of_user).to be false
+      end
+    end
+  end
 end
