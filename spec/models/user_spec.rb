@@ -1,5 +1,5 @@
 require 'rails_helper'
-# TODO refactor codes, DRY out your code
+
 RSpec.describe User, type: :model do
   # pending "add some examples to (or delete) #{__FILE__}"
   describe "Validations" do
