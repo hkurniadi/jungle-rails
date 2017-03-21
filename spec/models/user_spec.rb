@@ -144,7 +144,7 @@ RSpec.describe User, type: :model do
             password_confirmation: "qwertyqwerty"
           })
         @user.save
-        @instance_of_user = User.find_by(email: "beepbeep@email.com").try(:authenticate, "qwertyqwerty")
+        @instance_of_user = User.authenticate_with_credentials("beepbeep@email.com", "qwertyqwerty")
         expect(@instance_of_user).to_not be nil
       end
     end
@@ -159,7 +159,7 @@ RSpec.describe User, type: :model do
             password_confirmation: "qwertyqwerty"
           })
         @user.save
-        @instance_of_user = User.find_by(email: "bepbeep@email.com").try(:authenticate, "qwertyqwerty")
+        @instance_of_user = User.authenticate_with_credentials("bepbeep@email.com", "qwertyqwerty")
         expect(@instance_of_user).to be nil
       end
     end
@@ -174,8 +174,38 @@ RSpec.describe User, type: :model do
             password_confirmation: "qwertyqwerty"
           })
         @user.save
-        @instance_of_user = User.find_by(email: "beepbeep@email.com").try(:authenticate, "qwertyqwer")
-        expect(@instance_of_user).to be false
+        @instance_of_user = User.authenticate_with_credentials("beepbeep@email.com", "qwertyqwer")
+        expect(@instance_of_user).to be nil
+      end
+    end
+
+    context "given email input with spaces" do
+      it "should return an instance of the user" do
+        @user = User.new({
+            first_name: "Bib",
+            last_name: "Bob",
+            email: "beepbeep@email.com",
+            password: "qwertyqwerty",
+            password_confirmation: "qwertyqwerty"
+          })
+        @user.save
+        @instance_of_user = User.authenticate_with_credentials(" beepbeep@email.com ", "qwertyqwerty")
+        expect(@instance_of_user).to_not be nil
+      end
+    end
+
+    context "given email input with upper and lower cases" do
+      it "should return an instance of the user" do
+        @user = User.new({
+            first_name: "Bib",
+            last_name: "Bob",
+            email: "beepbeep@email.com",
+            password: "qwertyqwerty",
+            password_confirmation: "qwertyqwerty"
+          })
+        @user.save
+        @instance_of_user = User.authenticate_with_credentials("BeePbeEp@email.com", "qwertyqwerty")
+        expect(@instance_of_user).to_not be nil
       end
     end
   end
